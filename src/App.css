@@ -1,0 +1,20 @@
+/* ============================================
+   CrewConnect — Global App CSS
+   Add this to your App.css or index.css
+   ============================================ */
+
+*,
+html,
+body,
+#root {
+  background-color: #080b0f;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Allow elements to override with transparent */
+input, select, button, label, h1, h2, h3, h4, h5, h6,
+p, span, a, nav, ul, li, svg, img, canvas {
+  background-color: transparent;
+}
