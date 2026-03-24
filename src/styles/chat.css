@@ -23,7 +23,6 @@
 
 /* ══════════════════════════════════════
    CHAT WRAPPER
-   <div style={{ display:"flex", height:"90vh" }}>
 ══════════════════════════════════════ */
 .chat-page {
     display: flex !important;
@@ -35,13 +34,12 @@
 }
 
 /* ══════════════════════════════════════
-   SIDEBAR — user list
-   <div style={{ width:"30%", borderRight... }}>
+   SIDEBAR — user list (narrower, ~22%)
 ══════════════════════════════════════ */
 .chat-sidebar {
-    width: 28% !important;
-    min-width: 220px !important;
-    max-width: 320px !important;
+    width: 22% !important;
+    min-width: 200px !important;
+    max-width: 280px !important;
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
@@ -54,27 +52,21 @@
 }
 
 /* Sidebar scrollbar */
-.chat-sidebar::-webkit-scrollbar {
-    width: 3px;
-}
-
-.chat-sidebar::-webkit-scrollbar-track {
-    background: transparent;
-}
-
+.chat-sidebar::-webkit-scrollbar { width: 3px; }
+.chat-sidebar::-webkit-scrollbar-track { background: transparent; }
 .chat-sidebar::-webkit-scrollbar-thumb {
     background: rgba(201, 168, 76, 0.2);
     border-radius: 2px;
 }
 
-/* ── Sidebar header <h3>Chats</h3> ── */
-.chat-sidebar>h3 {
+/* ── Sidebar header <h3> ── */
+.chat-sidebar > h3 {
     font-family: 'Cormorant Garamond', serif !important;
     font-size: 1.3rem !important;
     font-weight: 400 !important;
     letter-spacing: 0.08em !important;
     color: #ffffff !important;
-    padding: 28px 24px 20px !important;
+    padding: 32px 28px 24px !important;
     border-bottom: 1px solid var(--border) !important;
     background: var(--bg-sidebar) !important;
     position: sticky !important;
@@ -85,8 +77,7 @@
     gap: 10px !important;
 }
 
-/* Gold gem dot in sidebar header */
-.chat-sidebar>h3::before {
+.chat-sidebar > h3::before {
     content: '';
     display: inline-block;
     width: 5px;
@@ -98,17 +89,17 @@
 }
 
 /* ── "No users found" <p> ── */
-.chat-sidebar>p {
+.chat-sidebar > p {
     font-size: 11px !important;
     letter-spacing: 0.1em !important;
     color: var(--text-muted) !important;
-    padding: 20px 24px !important;
+    padding: 24px 28px !important;
     background: transparent !important;
 }
 
 /* ── USER ITEM ── */
 .chat-user-item {
-    padding: 16px 24px !important;
+    padding: 18px 28px !important;
     cursor: pointer !important;
     border-bottom: 1px solid rgba(201, 168, 76, 0.06) !important;
     transition: background 0.2s ease, border-left-color 0.2s ease !important;
@@ -127,7 +118,7 @@
 }
 
 /* User name */
-.chat-user-item>span:first-child,
+.chat-user-item > span:first-child,
 .chat-user-name {
     display: block !important;
     font-family: 'Montserrat', sans-serif !important;
@@ -135,7 +126,7 @@
     font-weight: 400 !important;
     letter-spacing: 0.06em !important;
     color: #f0ead8 !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 5px !important;
 }
 
 /* User email <small> */
@@ -149,8 +140,7 @@
 }
 
 /* ══════════════════════════════════════
-   CHAT AREA — right side
-   <div style={{ width:"70%", padding:"10px" }}>
+   CHAT AREA — right side (wider, flex:1)
 ══════════════════════════════════════ */
 .chat-area {
     flex: 1 !important;
@@ -160,16 +150,17 @@
     background: var(--bg-chat) !important;
     overflow: hidden !important;
     padding: 0 !important;
+    min-width: 0 !important;
 }
 
-/* ── Chat header <h3>Chat with {name}</h3> ── */
-.chat-area>h3 {
+/* ── Chat header <h3> ── */
+.chat-area > h3 {
     font-family: 'Cormorant Garamond', serif !important;
-    font-size: 1.2rem !important;
+    font-size: 1.25rem !important;
     font-weight: 400 !important;
     letter-spacing: 0.08em !important;
     color: #ffffff !important;
-    padding: 22px 28px !important;
+    padding: 26px 48px !important;
     border-bottom: 1px solid var(--border) !important;
     background: rgba(10, 14, 20, 0.8) !important;
     flex-shrink: 0 !important;
@@ -178,7 +169,7 @@
     gap: 10px !important;
 }
 
-.chat-area>h3::before {
+.chat-area > h3::before {
     content: '';
     display: inline-block;
     width: 8px;
@@ -189,8 +180,8 @@
     box-shadow: 0 0 6px rgba(74, 158, 106, 0.6);
 }
 
-/* ── Empty state <p>Select a user...</p> ── */
-.chat-area>p {
+/* ── Empty state <p> ── */
+.chat-area > p {
     flex: 1 !important;
     display: flex !important;
     align-items: center !important;
@@ -206,97 +197,88 @@
 }
 
 /* ══════════════════════════════════════
-   MESSAGES CONTAINER
-   <div style={{ height:"350px", overflowY... }}>
+   MESSAGES CONTAINER — spacious padding
 ══════════════════════════════════════ */
 .chat-messages {
     flex: 1 !important;
     overflow-y: auto !important;
-    padding: 24px 28px !important;
+    padding: 40px 72px !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 20px !important;
     background: var(--bg-chat) !important;
     border: none !important;
-    /* override inline border:1px solid gray */
     height: auto !important;
-    /* override inline height:350px */
     margin-bottom: 0 !important;
 }
 
 /* Custom scrollbar */
-.chat-messages::-webkit-scrollbar {
-    width: 4px;
-}
-
-.chat-messages::-webkit-scrollbar-track {
-    background: transparent;
-}
-
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
 .chat-messages::-webkit-scrollbar-thumb {
     background: rgba(201, 168, 76, 0.15);
     border-radius: 2px;
 }
 
 /* ── MESSAGE ROW <p key={i}> ── */
-.chat-messages>p {
+.chat-messages > p {
     display: flex !important;
     flex-direction: column !important;
-    max-width: 65% !important;
+    max-width: 58% !important;
     background: transparent !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
 /* "Me" messages — align RIGHT */
-.chat-messages>p.msg-me {
+.chat-messages > p.msg-me {
     align-self: flex-end !important;
     align-items: flex-end !important;
 }
 
 /* "Them" messages — align LEFT */
-.chat-messages>p.msg-them {
+.chat-messages > p.msg-them {
     align-self: flex-start !important;
     align-items: flex-start !important;
 }
 
 /* Sender name <b> */
-.chat-messages>p>b {
+.chat-messages > p > b {
     font-family: 'Montserrat', sans-serif !important;
     font-size: 9px !important;
     font-weight: 500 !important;
     letter-spacing: 0.22em !important;
     text-transform: uppercase !important;
     color: var(--gold-dim) !important;
-    margin-bottom: 5px !important;
+    margin-bottom: 7px !important;
     background: transparent !important;
 }
 
-.chat-messages>p.msg-me>b {
+.chat-messages > p.msg-me > b {
     color: var(--gold) !important;
 }
 
-/* Message bubble — the text after <b> */
-.chat-messages>p>.bubble {
+/* Message bubble */
+.chat-messages > p > .bubble {
     display: inline-block !important;
-    padding: 10px 16px !important;
+    padding: 14px 22px !important;
     border-radius: 2px !important;
     font-family: 'Montserrat', sans-serif !important;
     font-size: 12.5px !important;
     font-weight: 300 !important;
     letter-spacing: 0.04em !important;
-    line-height: 1.6 !important;
+    line-height: 1.75 !important;
     word-break: break-word !important;
 }
 
-.chat-messages>p.msg-me>.bubble {
+.chat-messages > p.msg-me > .bubble {
     background: var(--bg-msg-me) !important;
     color: #f0ead8 !important;
     border: 1px solid rgba(201, 168, 76, 0.2) !important;
     border-bottom-right-radius: 0 !important;
 }
 
-.chat-messages>p.msg-them>.bubble {
+.chat-messages > p.msg-them > .bubble {
     background: var(--bg-msg-them) !important;
     color: #d8d0c0 !important;
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
@@ -304,14 +286,13 @@
 }
 
 /* ══════════════════════════════════════
-   INPUT ROW
-   <input> + <button onClick={sendMessage}>
+   INPUT ROW — wider, more breathing room
 ══════════════════════════════════════ */
 .chat-input-row {
     display: flex !important;
     align-items: center !important;
     gap: 0 !important;
-    padding: 16px 28px 20px !important;
+    padding: 20px 72px 26px !important;
     border-top: 1px solid var(--border) !important;
     background: rgba(8, 11, 15, 0.9) !important;
     flex-shrink: 0 !important;
@@ -321,8 +302,7 @@
 .chat-input-row input {
     flex: 1 !important;
     width: auto !important;
-    /* override inline width:70% */
-    padding: 14px 18px !important;
+    padding: 16px 22px !important;
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid var(--border) !important;
     border-right: none !important;
@@ -350,9 +330,8 @@
 
 /* Send button */
 .chat-input-row button {
-    padding: 14px 28px !important;
+    padding: 16px 32px !important;
     margin-left: 0 !important;
-    /* override inline marginLeft:10px */
     font-family: 'Montserrat', sans-serif !important;
     font-size: 9.5px !important;
     font-weight: 500 !important;
@@ -381,11 +360,6 @@
 
 /* ── Animations ── */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
