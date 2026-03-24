@@ -1,0 +1,391 @@
+/* ============================================
+   CrewConnect — Chat Page CSS
+   Theme: Dark Opulence / Refined Elegance
+   File: src/styles/chat.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+:root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #8a6a28;
+    --bg-deep: #080b0f;
+    --bg-sidebar: #0a0e14;
+    --bg-chat: #0d1219;
+    --bg-msg-me: #1a2535;
+    --bg-msg-them: #111820;
+    --text-primary: #f0ead8;
+    --text-muted: #8a8a8a;
+    --border: rgba(201, 168, 76, 0.15);
+    --border-focus: rgba(201, 168, 76, 0.55);
+}
+
+/* ══════════════════════════════════════
+   CHAT WRAPPER
+   <div style={{ display:"flex", height:"90vh" }}>
+══════════════════════════════════════ */
+.chat-page {
+    display: flex !important;
+    height: calc(100vh - 64px) !important;
+    width: 100% !important;
+    background: var(--bg-deep) !important;
+    overflow: hidden !important;
+    animation: fadeIn 0.5s ease both;
+}
+
+/* ══════════════════════════════════════
+   SIDEBAR — user list
+   <div style={{ width:"30%", borderRight... }}>
+══════════════════════════════════════ */
+.chat-sidebar {
+    width: 28% !important;
+    min-width: 220px !important;
+    max-width: 320px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: var(--bg-sidebar) !important;
+    border-right: 1px solid var(--border) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+}
+
+/* Sidebar scrollbar */
+.chat-sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.chat-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.2);
+    border-radius: 2px;
+}
+
+/* ── Sidebar header <h3>Chats</h3> ── */
+.chat-sidebar>h3 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.08em !important;
+    color: #ffffff !important;
+    padding: 28px 24px 20px !important;
+    border-bottom: 1px solid var(--border) !important;
+    background: var(--bg-sidebar) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 2;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+/* Gold gem dot in sidebar header */
+.chat-sidebar>h3::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    min-width: 5px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px rgba(201, 168, 76, 0.6);
+}
+
+/* ── "No users found" <p> ── */
+.chat-sidebar>p {
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+    color: var(--text-muted) !important;
+    padding: 20px 24px !important;
+    background: transparent !important;
+}
+
+/* ── USER ITEM ── */
+.chat-user-item {
+    padding: 16px 24px !important;
+    cursor: pointer !important;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.06) !important;
+    transition: background 0.2s ease, border-left-color 0.2s ease !important;
+    border-left: 2px solid transparent !important;
+    background: transparent !important;
+}
+
+.chat-user-item:hover {
+    background: rgba(201, 168, 76, 0.05) !important;
+    border-left-color: rgba(201, 168, 76, 0.3) !important;
+}
+
+.chat-user-item.active {
+    background: rgba(201, 168, 76, 0.08) !important;
+    border-left-color: var(--gold) !important;
+}
+
+/* User name */
+.chat-user-item>span:first-child,
+.chat-user-name {
+    display: block !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.06em !important;
+    color: #f0ead8 !important;
+    margin-bottom: 4px !important;
+}
+
+/* User email <small> */
+.chat-user-item small,
+.chat-user-email {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.08em !important;
+    color: var(--text-muted) !important;
+}
+
+/* ══════════════════════════════════════
+   CHAT AREA — right side
+   <div style={{ width:"70%", padding:"10px" }}>
+══════════════════════════════════════ */
+.chat-area {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    background: var(--bg-chat) !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+/* ── Chat header <h3>Chat with {name}</h3> ── */
+.chat-area>h3 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.2rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.08em !important;
+    color: #ffffff !important;
+    padding: 22px 28px !important;
+    border-bottom: 1px solid var(--border) !important;
+    background: rgba(10, 14, 20, 0.8) !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.chat-area>h3::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    background: #4a9e6a;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(74, 158, 106, 0.6);
+}
+
+/* ── Empty state <p>Select a user...</p> ── */
+.chat-area>p {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.1em !important;
+    color: rgba(138, 138, 138, 0.45) !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   MESSAGES CONTAINER
+   <div style={{ height:"350px", overflowY... }}>
+══════════════════════════════════════ */
+.chat-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 24px 28px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    background: var(--bg-chat) !important;
+    border: none !important;
+    /* override inline border:1px solid gray */
+    height: auto !important;
+    /* override inline height:350px */
+    margin-bottom: 0 !important;
+}
+
+/* Custom scrollbar */
+.chat-messages::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+}
+
+/* ── MESSAGE ROW <p key={i}> ── */
+.chat-messages>p {
+    display: flex !important;
+    flex-direction: column !important;
+    max-width: 65% !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* "Me" messages — align RIGHT */
+.chat-messages>p.msg-me {
+    align-self: flex-end !important;
+    align-items: flex-end !important;
+}
+
+/* "Them" messages — align LEFT */
+.chat-messages>p.msg-them {
+    align-self: flex-start !important;
+    align-items: flex-start !important;
+}
+
+/* Sender name <b> */
+.chat-messages>p>b {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
+    color: var(--gold-dim) !important;
+    margin-bottom: 5px !important;
+    background: transparent !important;
+}
+
+.chat-messages>p.msg-me>b {
+    color: var(--gold) !important;
+}
+
+/* Message bubble — the text after <b> */
+.chat-messages>p>.bubble {
+    display: inline-block !important;
+    padding: 10px 16px !important;
+    border-radius: 2px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12.5px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.6 !important;
+    word-break: break-word !important;
+}
+
+.chat-messages>p.msg-me>.bubble {
+    background: var(--bg-msg-me) !important;
+    color: #f0ead8 !important;
+    border: 1px solid rgba(201, 168, 76, 0.2) !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.chat-messages>p.msg-them>.bubble {
+    background: var(--bg-msg-them) !important;
+    color: #d8d0c0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+/* ══════════════════════════════════════
+   INPUT ROW
+   <input> + <button onClick={sendMessage}>
+══════════════════════════════════════ */
+.chat-input-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0 !important;
+    padding: 16px 28px 20px !important;
+    border-top: 1px solid var(--border) !important;
+    background: rgba(8, 11, 15, 0.9) !important;
+    flex-shrink: 0 !important;
+}
+
+/* Message input */
+.chat-input-row input {
+    flex: 1 !important;
+    width: auto !important;
+    /* override inline width:70% */
+    padding: 14px 18px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--border) !important;
+    border-right: none !important;
+    border-radius: 1px 0 0 1px !important;
+    color: #f0ead8 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.06em !important;
+    outline: none !important;
+    caret-color: var(--gold) !important;
+    transition: border-color 0.3s ease, background 0.3s ease !important;
+}
+
+.chat-input-row input::placeholder {
+    color: rgba(138, 138, 138, 0.35) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+}
+
+.chat-input-row input:focus {
+    border-color: var(--border-focus) !important;
+    background: rgba(201, 168, 76, 0.04) !important;
+}
+
+/* Send button */
+.chat-input-row button {
+    padding: 14px 28px !important;
+    margin-left: 0 !important;
+    /* override inline marginLeft:10px */
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 9.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.26em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    border-radius: 0 1px 1px 0 !important;
+    border: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    background: linear-gradient(135deg, var(--gold) 0%, #b8922a 60%, var(--gold-light) 100%) !important;
+    color: #0a0c0f !important;
+    flex-shrink: 0 !important;
+}
+
+.chat-input-row button:hover {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%) !important;
+    transform: none !important;
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.3) !important;
+}
+
+.chat-input-row button:active {
+    opacity: 0.85 !important;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
