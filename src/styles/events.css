@@ -1,0 +1,391 @@
+/* ============================================
+   CrewConnect — Events Page CSS
+   Theme: Dark Opulence / Refined Elegance
+   File: src/styles/events.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #8a6a28;
+    --bg-deep: #080b0f;
+    --bg-card: #0d1219;
+    --text-primary: #f0ead8;
+    --text-white: #ffffff;
+    --text-muted: #a0a0a0;
+    --border: rgba(201, 168, 76, 0.2);
+    --border-hover: rgba(201, 168, 76, 0.45);
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root {
+    background: var(--bg-deep);
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ── Grain Overlay ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.28;
+    animation: grainShift 0.8s steps(1) infinite;
+}
+
+@keyframes grainShift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 1px);
+    }
+
+    50% {
+        transform: translate(1px, -2px);
+    }
+
+    75% {
+        transform: translate(-1px, 2px);
+    }
+
+    100% {
+        transform: translate(2px, -1px);
+    }
+}
+
+/* ══════════════════════════════════════
+   PAGE WRAPPER — outer <div>
+══════════════════════════════════════ */
+div:has(> div > h2),
+div:has(> p:first-child) {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 52px 48px 100px;
+    background: var(--bg-deep) !important;
+    animation: pageIn 0.7s ease 0.1s both;
+}
+
+/* ── "No events found" ── */
+div:has(> div > h2)>p,
+div:has(> p:first-child)>p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 100px 0;
+}
+
+/* ══════════════════════════════════════
+   EVENTS GRID — auto-layout for many cards
+══════════════════════════════════════ */
+div:has(> div > h2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 28px;
+    align-items: start;
+}
+
+/* ══════════════════════════════════════
+   EVENT CARD — each <div key={e._id}>
+══════════════════════════════════════ */
+div:has(> div > h2)>div {
+    position: relative;
+    background: linear-gradient(150deg, #0f1822 0%, #0a0f18 100%) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 3px;
+    /* SPACIOUS internal padding */
+    padding: 44px 48px 40px !important;
+    margin: 0 !important;
+    overflow: hidden;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+    animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    box-shadow:
+        0 0 0 1px rgba(201, 168, 76, 0.05),
+        0 8px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* Stagger cards */
+div:has(> div > h2)>div:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+div:has(> div > h2)>div:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+div:has(> div > h2)>div:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+div:has(> div > h2)>div:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+div:has(> div > h2)>div:nth-child(5) {
+    animation-delay: 0.33s;
+}
+
+div:has(> div > h2)>div:nth-child(6) {
+    animation-delay: 0.40s;
+}
+
+div:has(> div > h2)>div:nth-child(n+7) {
+    animation-delay: 0.46s;
+}
+
+div:has(> div > h2)>div:hover {
+    border-color: var(--border-hover) !important;
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 0 1px rgba(201, 168, 76, 0.12),
+        0 24px 64px rgba(0, 0, 0, 0.65),
+        0 0 48px rgba(201, 168, 76, 0.04);
+}
+
+/* Gold top accent line */
+div:has(> div > h2)>div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.8;
+}
+
+/* Left gold reveal on hover */
+div:has(> div > h2)>div::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 2px;
+    height: 0;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    transition: height 0.5s ease;
+}
+
+div:has(> div > h2)>div:hover::after {
+    height: 80%;
+}
+
+/* ══════════════════════════════════════
+   EVENT TITLE <h2>
+══════════════════════════════════════ */
+div:has(> div > h2)>div h2 {
+    font-family: 'Cormorant Garamond', serif;
+    /* BIG, visible title */
+    font-size: 2rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.04em;
+    /* PURE WHITE */
+    color: #ffffff !important;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border) !important;
+    line-height: 1.2;
+    background: transparent !important;
+}
+
+/* ══════════════════════════════════════
+   META INFO <p> — date, createdBy, type, venue
+══════════════════════════════════════ */
+div:has(> div > h2)>div>p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px !important;
+    /* VISIBLE */
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    /* WARM WHITE */
+    color: #d8d0c0 !important;
+    margin-top: 12px;
+    line-height: 1.7;
+    background: transparent !important;
+}
+
+/* Bold labels — TYPE:, VENUE: etc */
+div:has(> div > h2)>div>p b {
+    color: var(--gold) !important;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-right: 6px;
+    background: transparent !important;
+}
+
+/* Date — first <p> */
+div:has(> div > h2)>div>p:first-of-type {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem !important;
+    font-weight: 400;
+    color: var(--gold-light) !important;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+}
+
+div:has(> div > h2)>div>p:first-of-type b {
+    color: var(--gold-light) !important;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: inherit;
+    text-transform: none;
+    letter-spacing: inherit;
+}
+
+/* ══════════════════════════════════════
+   SECTION HEADINGS <h3>
+   Timeline & Staff Assignments
+══════════════════════════════════════ */
+div:has(> div > h2)>div h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem !important;
+    /* BIGGER heading */
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    /* WHITE */
+    color: #f0ead8 !important;
+    margin-top: 36px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12) !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent !important;
+}
+
+/* Gold gem dot */
+div:has(> div > h2)>div h3::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    min-width: 5px;
+    height: 5px;
+    background: var(--gold) !important;
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px rgba(201, 168, 76, 0.6);
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════
+   TIMELINE & STAFF ROWS <p>
+   - task @ time  /  - role: name @ time
+══════════════════════════════════════ */
+div:has(> div > h2)>div h3~p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12.5px !important;
+    /* READABLE */
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    /* LIGHT WHITE */
+    color: #c8c0b0 !important;
+    padding: 10px 0 10px 20px;
+    border-left: 1px solid rgba(201, 168, 76, 0.15) !important;
+    margin-top: 8px;
+    line-height: 1.6;
+    background: transparent !important;
+    transition: border-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
+}
+
+div:has(> div > h2)>div h3~p:hover {
+    border-left-color: var(--gold) !important;
+    color: #f0ead8 !important;
+    padding-left: 24px;
+}
+
+/* ── Navbar links ── */
+a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f0ead8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    background: transparent !important;
+}
+
+a:hover {
+    color: var(--gold);
+}
+
+/* ── Animations ── */
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    div:has(> div > h2) {
+        grid-template-columns: 1fr;
+        padding: 40px 32px 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    div:has(> div > h2) {
+        padding: 28px 16px 60px;
+    }
+
+    div:has(> div > h2)>div {
+        padding: 32px 24px 28px !important;
+    }
+
+    div:has(> div > h2)>div h2 {
+        font-size: 1.6rem !important;
+    }
+}

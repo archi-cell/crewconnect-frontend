@@ -1,0 +1,359 @@
+/* ============================================
+   CrewConnect — Create Event Page CSS
+   Theme: Dark Opulence / Refined Elegance
+   File: src/styles/createEvent.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+:root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #8a6a28;
+    --bg-deep: #080b0f;
+    --text-primary: #f0ead8;
+    --text-muted: #a0a0a0;
+    --border: rgba(201, 168, 76, 0.18);
+    --border-focus: rgba(201, 168, 76, 0.55);
+}
+
+/* ── Grain overlay ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.28;
+    animation: grainShift 0.8s steps(1) infinite;
+}
+
+@keyframes grainShift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 1px);
+    }
+
+    50% {
+        transform: translate(1px, -2px);
+    }
+
+    75% {
+        transform: translate(-1px, 2px);
+    }
+
+    100% {
+        transform: translate(2px, -1px);
+    }
+}
+
+/* ══════════════════════════════════════
+   ROOT <div> — page wrapper
+   Uses class .ce-page added to the div
+══════════════════════════════════════ */
+.ce-page {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    /* CENTER horizontally */
+    padding: 56px 48px 100px !important;
+    background: var(--bg-deep) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    position: relative;
+    z-index: 1;
+    animation: pageIn 0.8s ease 0.1s both;
+}
+
+/* ══════════════════════════════════════
+   <h2> — "Create Event"
+══════════════════════════════════════ */
+.ce-page>h2 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: clamp(2.2rem, 4vw, 3.2rem) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.06em !important;
+    color: #ffffff !important;
+    text-align: center !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 44px !important;
+    position: relative;
+    background: transparent !important;
+}
+
+.ce-page>h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ══════════════════════════════════════
+   <label> — "Select Date:" / "Select Day:"
+══════════════════════════════════════ */
+.ce-page label {
+    display: block !important;
+    font-size: 8.5px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.30em !important;
+    text-transform: uppercase !important;
+    color: var(--gold-dim) !important;
+    margin-top: 28px !important;
+    margin-bottom: 9px !important;
+    background: transparent !important;
+}
+
+/* ══════════════════════════════════════
+   <input> — ALL inputs
+   display:block forces them to stack
+══════════════════════════════════════ */
+.ce-page input {
+    display: block !important;
+    /* ← STACKS inputs vertically */
+    width: 100% !important;
+    padding: 15px 18px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 1px !important;
+    color: var(--text-primary) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.08em !important;
+    outline: none !important;
+    caret-color: var(--gold);
+    transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 16px !important;
+}
+
+.ce-page input::placeholder {
+    color: rgba(138, 138, 138, 0.35) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em !important;
+}
+
+.ce-page input:focus {
+    border-color: var(--border-focus) !important;
+    background: rgba(201, 168, 76, 0.04) !important;
+    box-shadow:
+        0 0 0 1px rgba(201, 168, 76, 0.08),
+        0 4px 20px rgba(201, 168, 76, 0.07),
+        inset 0 1px 0 rgba(201, 168, 76, 0.04) !important;
+}
+
+/* Date icon tint */
+.ce-page input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6) sepia(1) saturate(2) hue-rotate(10deg);
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+/* ══════════════════════════════════════
+   <select> — Day dropdown
+══════════════════════════════════════ */
+.ce-page select {
+    display: block !important;
+    /* ← STACKS below label */
+    width: 100% !important;
+    padding: 15px 40px 15px 18px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 1px !important;
+    color: var(--text-primary) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.08em !important;
+    outline: none !important;
+    cursor: pointer;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a6a28' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 16px center !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 16px !important;
+}
+
+.ce-page select:focus {
+    border-color: var(--border-focus) !important;
+    background-color: rgba(201, 168, 76, 0.04) !important;
+    box-shadow:
+        0 0 0 1px rgba(201, 168, 76, 0.08),
+        0 4px 20px rgba(201, 168, 76, 0.07) !important;
+}
+
+.ce-page select option {
+    background: #111820 !important;
+    color: var(--text-primary) !important;
+}
+
+/* ══════════════════════════════════════
+   <h3> — "Timeline" & "Staff Assignments"
+══════════════════════════════════════ */
+.ce-page h3 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.3rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.08em !important;
+    color: var(--text-primary) !important;
+    margin-top: 48px !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid var(--border) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background: transparent !important;
+}
+
+/* Gold gem dot */
+.ce-page h3::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    min-width: 5px;
+    height: 5px;
+    background: var(--gold) !important;
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
+}
+
+/* ══════════════════════════════════════
+   <button> — "Add Timeline" & "Add Staff"
+   Ghost gold, full width
+══════════════════════════════════════ */
+.ce-page button {
+    display: block !important;
+    /* full width block */
+    width: 100% !important;
+    padding: 14px 32px !important;
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.28em !important;
+    text-transform: uppercase !important;
+    border-radius: 1px !important;
+    cursor: pointer !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    background: transparent !important;
+    color: var(--gold) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.ce-page button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(201, 168, 76, 0.06) !important;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ce-page button:hover {
+    border-color: rgba(201, 168, 76, 0.45) !important;
+    color: var(--gold-light) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.1) !important;
+}
+
+.ce-page button:hover::before {
+    opacity: 1;
+}
+
+.ce-page button:active {
+    transform: translateY(0);
+}
+
+/* ══════════════════════════════════════
+   LAST button — "Create Event"
+   Gold gradient primary
+══════════════════════════════════════ */
+.ce-page>button:last-child,
+.ce-page button:last-of-type {
+    background: linear-gradient(135deg, var(--gold) 0%, #b8922a 50%, var(--gold-light) 100%) !important;
+    background-size: 200% 200% !important;
+    background-position: 0% 50% !important;
+    color: #0a0c0f !important;
+    border: none !important;
+    margin-top: 44px !important;
+    padding: 18px 32px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.32em !important;
+    box-shadow:
+        0 0 0 1px rgba(201, 168, 76, 0.3),
+        0 8px 32px rgba(201, 168, 76, 0.22),
+        0 2px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+.ce-page>button:last-child::before,
+.ce-page button:last-of-type::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent) !important;
+}
+
+.ce-page>button:last-child:hover,
+.ce-page button:last-of-type:hover {
+    background-position: 100% 50% !important;
+    transform: translateY(-2px) !important;
+    letter-spacing: 0.38em !important;
+    color: #0a0c0f !important;
+    box-shadow:
+        0 0 0 1px rgba(201, 168, 76, 0.5),
+        0 12px 40px rgba(201, 168, 76, 0.38),
+        0 2px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.ce-page>button:last-child:hover::before,
+.ce-page button:last-of-type:hover::before {
+    opacity: 1;
+    animation: shimmer 0.7s ease forwards;
+}
+
+/* Hide <br> */
+.ce-page br {
+    display: none !important;
+}
+
+/* ── Animations ── */
+@keyframes shimmer {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .ce-page {
+        padding: 36px 20px 80px !important;
+    }
+}

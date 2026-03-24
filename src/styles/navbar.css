@@ -1,0 +1,126 @@
+/* ============================================
+   CrewConnect — Navbar CSS
+   File: src/styles/navbar.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+:root {
+    --gold: #c9a84c;
+    --gold-dim: #8a6a28;
+}
+
+/* ══════════════════════════════════════
+   <nav> — visual bar only
+   Position/sticky handled by wrapper div
+══════════════════════════════════════ */
+nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    height: 64px;
+    padding: 0 40px;
+    background: rgba(8, 11, 15, 0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.14);
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Gold top accent line */
+nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent, rgba(201, 168, 76, 0.8) 50%, transparent);
+    pointer-events: none;
+}
+
+/* ── Nav links ── */
+nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #f0ead8 !important;
+    background: transparent !important;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e8c97a !important;
+}
+
+/* Underline sweep on hover */
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 60%;
+}
+
+/* Separator between links */
+nav a+a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 12px;
+    background: rgba(201, 168, 76, 0.2);
+}
+
+/* Admin links — gold */
+nav a[href="/dashboard"],
+nav a[href="/create-event"] {
+    color: #c9a84c !important;
+}
+
+nav a[href="/dashboard"]:hover,
+nav a[href="/create-event"]:hover {
+    color: #e8c97a !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 0 12px;
+    }
+
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav a {
+        padding: 0 12px;
+        font-size: 9px;
+    }
+}
