@@ -1,6 +1,4 @@
-/* ============================================
-CrewConnect — Chat Page CSS (FINAL SAFE BUILD)
-============================================ */
+
 
 :root {
 --gold: #c9a84c;
@@ -12,7 +10,7 @@ CrewConnect — Chat Page CSS (FINAL SAFE BUILD)
 --border: rgba(201,168,76,0.15);
 }
 
-/* BASE */
+
 .chat-page {
 display: flex;
 height: 100vh;
@@ -21,7 +19,6 @@ background: var(--bg-deep);
 overflow: hidden;
 }
 
-/* SIDEBAR */
 .chat-sidebar {
 width: 22%;
 min-width: 200px;
@@ -38,7 +35,7 @@ padding: 14px;
 cursor: pointer;
 }
 
-/* CHAT AREA */
+
 .chat-area {
 flex: 1;
 display: flex;
@@ -47,7 +44,6 @@ background: var(--bg-chat);
 min-height: 0;
 }
 
-/* MESSAGES */
 .chat-messages {
 flex: 1;
 overflow-y: auto;
@@ -59,10 +55,10 @@ gap: 12px;
 
 .chat-messages > p {
 max-width: 75%;
-word-break: break-word; /* prevent overflow */
+word-break: break-word; 
 }
 
-/* ALIGNMENT */
+
 .msg-me {
 align-self: flex-end;
 }
@@ -71,7 +67,7 @@ align-self: flex-end;
 align-self: flex-start;
 }
 
-/* BUBBLE */
+
 .bubble {
 padding: 10px;
 border-radius: 6px;
@@ -85,7 +81,7 @@ background: var(--bg-msg-me);
 background: var(--bg-msg-them);
 }
 
-/* INPUT */
+
 .chat-input-row {
 display: flex;
 gap: 8px;
@@ -96,7 +92,7 @@ border-top: 1px solid var(--border);
 .chat-input-row input {
 flex: 1;
 padding: 10px;
-min-width: 0; /* prevents overflow */
+min-width: 0; 
 }
 
 .chat-input-row button {
@@ -106,9 +102,7 @@ border: none;
 cursor: pointer;
 }
 
-/* =========================
-TABLET (≤1024px)
-========================= */
+
 @media (max-width: 1024px) {
 
 .chat-sidebar {
@@ -121,9 +115,6 @@ padding: 14px;
 }
 }
 
-/* =========================
-MOBILE (≤768px)
-========================= */
 @media (max-width: 768px) {
 
 .chat-page {
@@ -160,9 +151,6 @@ font-size: 1rem;
 }
 }
 
-/* =========================
-SMALL MOBILE (≤480px)
-========================= */
 @media (max-width: 480px) {
 
 .chat-messages > p {
