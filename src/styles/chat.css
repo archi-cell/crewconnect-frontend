@@ -142,3 +142,87 @@ max-width: 95%;
 gap: 6px;
 }
 }
+
+
+/* =========================
+TABLET (≤1024px)
+========================= */
+@media (max-width: 1024px) {
+
+.chat-sidebar {
+width: 28%;
+min-width: 180px;
+}
+
+.chat-messages {
+padding: 14px;
+}
+}
+
+/* =========================
+MOBILE (≤768px)
+========================= */
+@media (max-width: 768px) {
+
+.chat-page {
+flex-direction: column;
+}
+
+/* Sidebar horizontal scroll */
+.chat-sidebar {
+width: 100%;
+height: auto;
+flex-direction: row;
+overflow-x: auto;
+overflow-y: hidden;
+border-right: none;
+border-bottom: 1px solid var(--border);
+}
+
+.chat-sidebar > h3 {
+display: none;
+}
+
+.chat-user-item {
+min-width: 120px;
+flex-shrink: 0;
+border-right: 1px solid rgba(201,168,76,0.1);
+}
+
+.chat-messages {
+padding: 12px;
+}
+
+.chat-messages > p {
+max-width: 90%;
+}
+
+.chat-area > h3 {
+padding: 12px;
+font-size: 1rem;
+}
+}
+
+/* =========================
+SMALL MOBILE (≤480px)
+========================= */
+@media (max-width: 480px) {
+
+.chat-messages > p {
+max-width: 95%;
+}
+
+.chat-input-row {
+gap: 6px;
+}
+
+.chat-input-row input {
+font-size: 11px;
+padding: 8px;
+}
+
+.chat-input-row button {
+font-size: 10px;
+padding: 8px;
+}
+}
