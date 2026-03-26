@@ -1,155 +1,3 @@
-/* ============================================
-CrewConnect — Chat Page CSS (FULL RESPONSIVE)
-Works on: Mobile 📱 Tablet 📲 Laptop 💻
-============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
-
-:root {
---gold: #c9a84c;
---gold-light: #e8c97a;
---gold-dim: #8a6a28;
---bg-deep: #080b0f;
---bg-sidebar: #0a0e14;
---bg-chat: #0d1219;
---bg-msg-me: #1a2535;
---bg-msg-them: #111820;
---text-primary: #f0ead8;
---text-muted: #8a8a8a;
---border: rgba(201, 168, 76, 0.15);
---border-focus: rgba(201, 168, 76, 0.55);
-}
-
-/* =========================
-BASE LAYOUT
-========================= */
-.chat-page {
-display: flex;
-height: calc(100vh - 64px);
-width: 100%;
-background: var(--bg-deep);
-overflow: hidden;
-}
-
-/* =========================
-SIDEBAR
-========================= */
-.chat-sidebar {
-width: 22%;
-min-width: 200px;
-max-width: 280px;
-display: flex;
-flex-direction: column;
-background: var(--bg-sidebar);
-border-right: 1px solid var(--border);
-overflow-y: auto;
-}
-
-/* Header */
-.chat-sidebar > h3 {
-font-family: 'Cormorant Garamond', serif;
-font-size: 1.3rem;
-padding: 24px;
-border-bottom: 1px solid var(--border);
-}
-
-/* User */
-.chat-user-item {
-padding: 16px 20px;
-cursor: pointer;
-border-bottom: 1px solid rgba(201,168,76,0.06);
-}
-
-.chat-user-item:hover {
-background: rgba(201,168,76,0.05);
-}
-
-.chat-user-item.active {
-background: rgba(201,168,76,0.08);
-}
-
-/* =========================
-CHAT AREA
-========================= */
-.chat-area {
-flex: 1;
-display: flex;
-flex-direction: column;
-background: var(--bg-chat);
-}
-
-/* Header */
-.chat-area > h3 {
-padding: 20px 40px;
-border-bottom: 1px solid var(--border);
-}
-
-/* =========================
-MESSAGES
-========================= */
-.chat-messages {
-flex: 1;
-overflow-y: auto;
-padding: 30px 60px;
-display: flex;
-flex-direction: column;
-gap: 18px;
-}
-
-/* Message row */
-.chat-messages > p {
-display: flex;
-flex-direction: column;
-max-width: 60%;
-}
-
-/* Me / Them */
-.msg-me {
-align-self: flex-end;
-}
-.msg-them {
-align-self: flex-start;
-}
-
-/* Bubble */
-.bubble {
-padding: 12px 18px;
-font-size: 13px;
-line-height: 1.6;
-}
-
-.msg-me .bubble {
-background: var(--bg-msg-me);
-border: 1px solid rgba(201,168,76,0.2);
-}
-
-.msg-them .bubble {
-background: var(--bg-msg-them);
-}
-
-/* =========================
-INPUT
-========================= */
-.chat-input-row {
-display: flex;
-padding: 15px 60px;
-border-top: 1px solid var(--border);
-}
-
-.chat-input-row input {
-flex: 1;
-padding: 14px;
-border: 1px solid var(--border);
-background: transparent;
-color: white;
-}
-
-.chat-input-row button {
-padding: 14px 28px;
-background: var(--gold);
-border: none;
-}
-
 /* =========================
 TABLET (≤1024px)
 ========================= */
@@ -157,15 +5,16 @@ TABLET (≤1024px)
 
 ```
 .chat-sidebar {
-    width: 30%;
+    width: 28%;
+    min-width: 180px;
 }
 
 .chat-messages {
-    padding: 25px 25px;
+    padding: 16px;
 }
 
 .chat-input-row {
-    padding: 12px 25px;
+    padding: 10px;
 }
 ```
 
@@ -179,15 +28,22 @@ MOBILE (≤768px)
 ```
 .chat-page {
     flex-direction: column;
+    height: 100vh;
 }
 
-/* Sidebar top scroll */
+/* Sidebar becomes horizontal scroll */
 .chat-sidebar {
     width: 100%;
+    height: auto;
     flex-direction: row;
     overflow-x: auto;
+    overflow-y: hidden;
     border-right: none;
     border-bottom: 1px solid var(--border);
+}
+
+.chat-sidebar::-webkit-scrollbar {
+    height: 3px;
 }
 
 .chat-sidebar > h3 {
@@ -196,28 +52,33 @@ MOBILE (≤768px)
 
 .chat-user-item {
     min-width: 120px;
+    flex-shrink: 0;
     border-right: 1px solid rgba(201,168,76,0.1);
 }
 
+/* Chat area full height */
 .chat-area {
-    width: 100%;
-}
-
-.chat-messages {
-    padding: 20px 15px;
-}
-
-.chat-messages > p {
-    max-width: 85%;
+    flex: 1;
+    min-height: 0;
 }
 
 .chat-area > h3 {
-    padding: 15px;
+    padding: 12px;
     font-size: 1rem;
 }
 
+.chat-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+}
+
+.chat-messages > p {
+    max-width: 90%;
+}
+
 .chat-input-row {
-    padding: 10px 15px;
+    padding: 10px;
 }
 
 .chat-input-row input {
@@ -226,6 +87,7 @@ MOBILE (≤768px)
 
 .chat-input-row button {
     font-size: 10px;
+    padding: 10px 12px;
 }
 ```
 
@@ -237,21 +99,25 @@ SMALL MOBILE (≤480px)
 @media (max-width: 480px) {
 
 ```
+.chat-messages > p {
+    max-width: 95%;
+}
+
 .chat-input-row {
-    flex-direction: column;
-    gap: 10px;
+    display: flex;
+    flex-direction: row; /* keep inline */
+    gap: 8px;
 }
 
 .chat-input-row input {
-    width: 100%;
+    flex: 1;
+    font-size: 11px;
+    padding: 10px;
 }
 
 .chat-input-row button {
-    width: 100%;
-}
-
-.chat-messages > p {
-    max-width: 92%;
+    padding: 10px;
+    font-size: 9px;
 }
 ```
 
