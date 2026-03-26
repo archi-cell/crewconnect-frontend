@@ -1,5 +1,5 @@
 /* ============================================
-CrewConnect — Chat Page CSS (VALID + RESPONSIVE)
+CrewConnect — Chat Page CSS (FINAL CLEAN BUILD)
 ============================================ */
 
 :root {
@@ -100,50 +100,6 @@ background: var(--gold);
 border: none;
 }
 
-/* TABLET */
-@media (max-width: 1024px) {
-.chat-sidebar {
-width: 28%;
-}
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-.chat-page {
-flex-direction: column;
-}
-
-.chat-sidebar {
-width: 100%;
-flex-direction: row;
-overflow-x: auto;
-border-right: none;
-border-bottom: 1px solid var(--border);
-}
-
-.chat-user-item {
-min-width: 120px;
-}
-
-.chat-messages > p {
-max-width: 90%;
-}
-}
-
-/* SMALL MOBILE */
-@media (max-width: 480px) {
-
-.chat-messages > p {
-max-width: 95%;
-}
-
-.chat-input-row {
-gap: 6px;
-}
-}
-
-
 /* =========================
 TABLET (≤1024px)
 ========================= */
@@ -168,7 +124,6 @@ MOBILE (≤768px)
 flex-direction: column;
 }
 
-/* Sidebar horizontal scroll */
 .chat-sidebar {
 width: 100%;
 height: auto;
@@ -177,10 +132,6 @@ overflow-x: auto;
 overflow-y: hidden;
 border-right: none;
 border-bottom: 1px solid var(--border);
-}
-
-.chat-sidebar > h3 {
-display: none;
 }
 
 .chat-user-item {
