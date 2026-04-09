@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "../styles/login.css"
+import "../styles/login.css";
 
 // Ambient floating particles
 const Particles = () =>
@@ -20,6 +20,8 @@ const Particles = () =>
     ));
 
 export default function Login() {
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const [data, setData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -30,7 +32,7 @@ export default function Login() {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/api/auth/login",
+                `${API_URL}/api/auth/login`,
                 data
             );
 
@@ -38,7 +40,6 @@ export default function Login() {
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("role", res.data.role);
             localStorage.setItem("userId", res.data.user._id);
-
 
             // ✅ Redirect based on role
             if (res.data.role === "admin") {
