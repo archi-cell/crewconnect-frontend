@@ -3,7 +3,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import "../styles/chat.css";
 
-const socket = io(import.meta.env.VITE_API_URL);
+const socket = io("http://localhost:5000");
 
 export default function Chat() {
     const [users, setUsers] = useState([]);
@@ -12,14 +12,15 @@ export default function Chat() {
     const [messages, setMessages] = useState([]);
 
     const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-    const myId = role === "admin" ? "admin" : localStorage.getItem("userId");
+    const role  = localStorage.getItem("role");
+    const myId  = role === "admin" ? "admin" : localStorage.getItem("userId");
 
+    // ✅ LOAD USERS
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const res = await axios.get(
-                    `${import.meta.env.VITE_API_URL}/api/users/chat-users`,
+                    "http://localhost:5000/api/users/chat-users",
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setUsers(res.data);
@@ -30,6 +31,7 @@ export default function Chat() {
         fetchUsers();
     }, []);
 
+    // ✅ JOIN ROOM + LOAD HISTORY
     useEffect(() => {
         if (!selectedUser) return;
 
@@ -37,7 +39,7 @@ export default function Chat() {
         socket.emit("joinRoom", roomId);
 
         axios
-            .get(`${import.meta.env.VITE_API_URL}/api/chat/${roomId}`)
+            .get(`http://localhost:5000/api/chat/${roomId}`)
             .then((res) => setMessages(res.data))
             .catch((err) => console.log("CHAT LOAD ERROR:", err));
 
@@ -100,13 +102,7 @@ export default function Chat() {
                         {/* Messages list */}
                         <div
                             className="chat-messages"
-                            style={{
-                                height: "350px",
-                                overflowY: "scroll",
-                                border: "1px solid gray",
-                                padding: "10px",
-                                marginBottom: "10px"
-                            }}
+                            
                         >
                             {messages.map((m, i) => {
                                 const isMe = m.senderId === myId;
