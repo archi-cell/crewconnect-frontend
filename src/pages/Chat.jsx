@@ -3,7 +3,9 @@ import axios from "axios";
 import io from "socket.io-client";
 import "../styles/chat.css";
 
-const socket = io("http://localhost:5000");
+const API_URL = import.meta.env.VITE_API_URL;
+
+const socket = io(API_URL);
 
 export default function Chat() {
     const [users, setUsers] = useState([]);
@@ -20,8 +22,8 @@ export default function Chat() {
         const fetchUsers = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:5000/api/users/chat-users",
-                    { headers: { Authorization: `Bearer ${token}` } }
+                        `${API_URL}/api/users/chat-users`,
+                        { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setUsers(res.data);
             } catch (err) {
@@ -39,7 +41,7 @@ export default function Chat() {
         socket.emit("joinRoom", roomId);
 
         axios
-            .get(`http://localhost:5000/api/chat/${roomId}`)
+            .get(`${API_URL}/api/chat/${roomId}`)
             .then((res) => setMessages(res.data))
             .catch((err) => console.log("CHAT LOAD ERROR:", err));
 
