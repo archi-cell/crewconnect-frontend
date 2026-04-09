@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../styles/dashboard.css";
+import "../styles/dashboard.css"
 
 export default function Dashboard() {
     const [stats, setStats] = useState({
@@ -16,17 +16,15 @@ export default function Dashboard() {
         const fetchStats = async () => {
             try {
                 const res = await axios.get(
-                    `${import.meta.env.VITE_API_URL}/api/events/stats/all`,
+                    "http://localhost:5000/api/events/stats/all",
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`
                         }
                     }
                 );
-
                 console.log("STATS:", res.data);
                 setStats(res.data);
-
             } catch (err) {
                 console.log("ERROR:", err);
                 setError("Failed to load dashboard data");
@@ -34,7 +32,6 @@ export default function Dashboard() {
                 setLoading(false);
             }
         };
-
         fetchStats();
     }, []);
 
@@ -42,31 +39,34 @@ export default function Dashboard() {
     if (error) return <h3>{error}</h3>;
 
     return (
-        // ✅ Only change: added className="dash-page"
-        <div className="dash-page" style={{ padding: "20px" }}>
-            <h2>Admin Dashboard</h2>
+        <div className="dash-wrapper">
+            <div className="dash-container">
 
-            <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
-                <div style={cardStyle}>
-                    <h3>Total Events</h3>
-                    <p>{stats.totalEvents || 0}</p>
+                <h1 className="dash-title">Admin Dashboard</h1>
+
+                <div className="dash-grid">
+                    <div className="dash-card">
+                        <h3>Total Events</h3>
+                        <p>{stats.totalEvents || 0}</p>
+                    </div>
+
+                    <div className="dash-card">
+                        <h3>Total Users</h3>
+                        <p>{stats.totalUsers || 0}</p>
+                    </div>
+
+                    <div className="dash-card">
+                        <h3>Assigned Staff</h3>
+                        <p>{stats.assignedCount || 0}</p>
+                    </div>
                 </div>
 
-                <div style={cardStyle}>
-                    <h3>Total Users</h3>
-                    <p>{stats.totalUsers || 0}</p>
+                <div className="dash-actions">
+                    <a href="/create-event">
+                        <button className="dash-btn">Create Event</button>
+                    </a>
                 </div>
 
-                <div style={cardStyle}>
-                    <h3>Assigned Staff</h3>
-                    <p>{stats.assignedCount || 0}</p>
-                </div>
-            </div>
-
-            <div style={{ marginTop: "30px" }}>
-                <a href="/create-event">
-                    <button style={btnStyle}>Create Event</button>
-                </a>
             </div>
         </div>
     );
