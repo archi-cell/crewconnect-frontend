@@ -1,126 +1,129 @@
-/* ============================================
-   CrewConnect — Navbar CSS
-   File: src/styles/navbar.css
-   ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
-
-:root {
-    --gold: #c9a84c;
-    --gold-dim: #8a6a28;
-}
-
-/* ══════════════════════════════════════
-   <nav> — visual bar only
-   Position/sticky handled by wrapper div
-══════════════════════════════════════ */
-nav {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    height: 64px;
-    padding: 0 40px;
-    background: rgba(8, 11, 15, 0.97);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(201, 168, 76, 0.14);
-    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
-    position: relative;
-    box-sizing: border-box;
-}
-
-/* Gold top accent line */
-nav::before {
-    content: '';
-    position: absolute;
+/* ===== NAV WRAPPER ===== */
+.nav-wrapper {
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-            transparent, rgba(201, 168, 76, 0.8) 50%, transparent);
-    pointer-events: none;
+    z-index: 200;
+    width: 100%;
+    backdrop-filter: blur(14px);
+    background: rgba(8, 11, 15, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* ── Nav links ── */
-nav a {
-    position: relative;
-    display: inline-flex;
+/* ===== NAV CONTAINER ===== */
+.nav-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    height: 64px;
-    padding: 0 22px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    padding: 14px 20px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== LOGO ===== */
+.nav-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #eaeaea;
+}
+
+.nav-logo span {
+    color: #c9a84c;
+}
+
+/* ===== LINKS ===== */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+/* LINK STYLE */
+.nav-links a {
     text-decoration: none;
-    color: #f0ead8 !important;
-    background: transparent !important;
-    white-space: nowrap;
-    transition: color 0.3s ease;
+    color: #9aa4b2;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-nav a:hover {
-    color: #e8c97a !important;
+/* HOVER EFFECT */
+.nav-links a:hover {
+    color: #c9a84c;
 }
 
-/* Underline sweep on hover */
-nav a::after {
-    content: '';
+/* UNDERLINE ANIMATION */
+.nav-links a::after {
+    content: "";
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: #c9a84c;
     transition: width 0.3s ease;
 }
 
-nav a:hover::after {
-    width: 60%;
+.nav-links a:hover::after {
+    width: 100%;
 }
 
-/* Separator between links */
-nav a+a::before {
-    content: '';
+/* ===== ACTIVE LINK (OPTIONAL) ===== */
+.nav-links a.active {
+    color: #c9a84c;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
+.notification-wrapper {
+    position: relative;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.bell {
+    font-size: 20px;
+    position: relative;
+}
+
+.badge {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 12px;
-    background: rgba(201, 168, 76, 0.2);
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
 }
 
-/* Admin links — gold */
-nav a[href="/dashboard"],
-nav a[href="/create-event"] {
-    color: #c9a84c !important;
+.notification-dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: white;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
-nav a[href="/dashboard"]:hover,
-nav a[href="/create-event"]:hover {
-    color: #e8c97a !important;
-}
-
-/* ── Responsive ── */
-@media (max-width: 640px) {
-    nav {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding: 0 12px;
-    }
-
-    nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    nav a {
-        padding: 0 12px;
-        font-size: 9px;
-    }
+.notification-dropdown p {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
 }
