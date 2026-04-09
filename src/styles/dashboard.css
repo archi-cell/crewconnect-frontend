@@ -1,398 +1,100 @@
-/* ============================================
-   CrewConnect — Admin Dashboard CSS
-   File: src/styles/dashboard.css
-   ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Montserrat:wght@300;400;500&display=swap');
-
-:root {
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-dim: #8a6a28;
-    --bg-deep: #080b0f;
-    --text-muted: #a0a0a0;
-    --border: rgba(201, 168, 76, 0.22);
-    --border-hover: rgba(201, 168, 76, 0.55);
+/* ===== WRAPPER ===== */
+.dash-wrapper {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #1a1f2b, #0f1115);
+    padding: 40px 20px;
+    font-family: "Segoe UI", sans-serif;
 }
 
-/* ── Global background ── */
-html,
-body,
-#root {
-    background: var(--bg-deep) !important;
-    margin: 0;
-    padding: 0;
+/* ===== CONTAINER ===== */
+.dash-container {
+    max-width: 1000px;
+    margin: auto;
 }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--bg-deep) !important;
-    color: #f0ead8;
-    overflow-x: hidden;
+/* ===== TITLE ===== */
+.dash-title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #eaeaea;
 }
 
-/* ── Grain ── */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0.28;
-    animation: grainShift 0.8s steps(1) infinite;
+/* ===== GRID ===== */
+.dash-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
 }
 
-@keyframes grainShift {
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(-2px, 1px);
-    }
-
-    50% {
-        transform: translate(1px, -2px);
-    }
-
-    75% {
-        transform: translate(-1px, 2px);
-    }
-
-    100% {
-        transform: translate(2px, -1px);
-    }
+/* ===== CARD ===== */
+.dash-card {
+    background: rgba(22, 26, 34, 0.75);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    color: #eaeaea;
+    transition: all 0.3s ease;
 }
 
-/* ══════════════════════════════════════
-   .dash-page — ROOT DIV
-   Full width, centered column
-══════════════════════════════════════ */
-.dash-page {
-    /* Take full available width — no more, no less */
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    overflow-x: hidden !important;
-
-    /* Center everything vertically in remaining viewport */
-    min-height: calc(100vh - 64px) !important;
-
-    /* Column layout, centered */
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    padding: 60px 24px 80px !important;
-    background: var(--bg-deep) !important;
-    position: relative;
-    z-index: 1;
-    animation: pageIn 0.7s ease 0.1s both;
-}
-
-/* Corner ornaments */
-.dash-page::before {
-    content: '';
-    position: fixed;
-    top: 24px;
-    left: 24px;
-    width: 160px;
-    height: 160px;
-    border-top: 1px solid var(--gold-dim);
-    border-left: 1px solid var(--gold-dim);
-    background: transparent !important;
-    opacity: 0.18;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.dash-page::after {
-    content: '';
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 160px;
-    height: 160px;
-    border-bottom: 1px solid var(--gold-dim);
-    border-right: 1px solid var(--gold-dim);
-    background: transparent !important;
-    opacity: 0.18;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* ══════════════════════════════════════
-   <h2>Admin Dashboard</h2>
-══════════════════════════════════════ */
-.dash-page>h2 {
-    font-family: 'Cormorant Garamond', serif !important;
-    font-size: clamp(2rem, 4vw, 3.2rem) !important;
-    font-weight: 300 !important;
-    letter-spacing: 0.06em !important;
-    color: #ffffff !important;
-    text-align: center !important;
-    padding-bottom: 20px !important;
-    margin-bottom: 52px !important;
-    position: relative;
-    background: transparent !important;
-    width: 100%;
-    max-width: 760px;
-}
-
-.dash-page>h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-
-/* ══════════════════════════════════════
-   STATS ROW
-   <div style={{ display:"flex" ... }}>
-   Override inline flex — CENTERED ROW
-══════════════════════════════════════ */
-.dash-page>div:first-of-type {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 20px !important;
-    justify-content: center !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    max-width: 780px !important;
-    /* constrain total row width */
-    margin: 0 auto 48px !important;
-    background: transparent !important;
-}
-
-/* ══════════════════════════════════════
-   STAT CARD
-══════════════════════════════════════ */
-.dash-page>div:first-of-type>div {
-    /* Each card: equal flex, min 160px, max 220px */
-    flex: 1 1 160px !important;
-    min-width: 160px !important;
-    max-width: 220px !important;
-    width: auto !important;
-    /* override inline width:150px */
-
-    /* Override cardStyle */
-    background: linear-gradient(150deg, #0f1822 0%, #0a0f18 100%) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 3px !important;
-    padding: 40px 24px 36px !important;
-    box-shadow:
-        0 0 0 1px rgba(201, 168, 76, 0.05),
-        0 10px 40px rgba(0, 0, 0, 0.55) !important;
-    text-align: center !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 24px !important;
-
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
-    animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.dash-page>div:first-of-type>div:nth-child(1) {
-    animation-delay: 0.10s;
-}
-
-.dash-page>div:first-of-type>div:nth-child(2) {
-    animation-delay: 0.20s;
-}
-
-.dash-page>div:first-of-type>div:nth-child(3) {
-    animation-delay: 0.30s;
-}
-
-.dash-page>div:first-of-type>div:hover {
-    border-color: var(--border-hover) !important;
+.dash-card:hover {
     transform: translateY(-5px);
-    box-shadow:
-        0 0 0 1px rgba(201, 168, 76, 0.15),
-        0 20px 56px rgba(0, 0, 0, 0.65),
-        0 0 36px rgba(201, 168, 76, 0.06) !important;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.6);
 }
 
-/* Gold top line on card */
-.dash-page>div:first-of-type>div::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+/* ===== CARD TEXT ===== */
+.dash-card h3 {
+    font-size: 16px;
+    color: #9aa4b2;
+    margin-bottom: 10px;
 }
 
-/* ── Card label <h3> ── */
-.dash-page>div:first-of-type>div>h3 {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 9px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.30em !important;
-    text-transform: uppercase !important;
-    color: var(--text-muted) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    background: transparent !important;
-    text-align: center !important;
-    line-height: 1.5;
+.dash-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #c9a84c;
 }
 
-.dash-page>div:first-of-type>div>h3::before {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    min-width: 4px;
-    background: var(--gold) !important;
-    transform: rotate(45deg);
-    box-shadow: 0 0 6px rgba(201, 168, 76, 0.6);
-    flex-shrink: 0;
+/* ===== ACTIONS ===== */
+.dash-actions {
+    text-align: center;
+    margin-top: 40px;
 }
 
-/* ── Card number <p> ── */
-.dash-page>div:first-of-type>div>p {
-    font-family: 'Cormorant Garamond', serif !important;
-    font-size: 4.5rem !important;
-    font-weight: 300 !important;
-    color: #ffffff !important;
-    line-height: 1 !important;
-    background: transparent !important;
+/* ===== BUTTON ===== */
+.dash-btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #c9a84c, #a3832e);
+    color: #111;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* ══════════════════════════════════════
-   ACTIONS ROW
-   <div style={{ marginTop:"30px" }}>
-══════════════════════════════════════ */
-.dash-page>div:last-of-type {
-    display: flex !important;
-    justify-content: center !important;
-    margin-top: 0 !important;
-    background: transparent !important;
-    width: 100%;
+.dash-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201,168,76,0.4);
 }
 
-.dash-page>div:last-of-type>a {
-    text-decoration: none !important;
-    background: transparent !important;
+/* ===== LOADING / ERROR ===== */
+.dash-wrapper h3 {
+    text-align: center;
+    color: #9aa4b2;
+    margin-top: 40px;
 }
 
-/* ══════════════════════════════════════
-   CREATE EVENT BUTTON
-   Override green btnStyle
-══════════════════════════════════════ */
-.dash-page button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 16px 60px !important;
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 10px !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.28em !important;
-    text-transform: uppercase !important;
-    border-radius: 1px !important;
-    cursor: pointer !important;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-
-    /* Override green */
-    background: linear-gradient(135deg, var(--gold) 0%, #b8922a 50%, var(--gold-light) 100%) !important;
-    background-size: 200% 200% !important;
-    background-position: 0% 50% !important;
-    color: #0a0c0f !important;
-    border: none !important;
-    box-shadow:
-        0 0 0 1px rgba(201, 168, 76, 0.3),
-        0 8px 32px rgba(201, 168, 76, 0.25) !important;
-}
-
-.dash-page button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent) !important;
-    transform: translateX(-100%);
-}
-
-.dash-page button:hover {
-    background-position: 100% 50% !important;
-    transform: translateY(-2px) !important;
-    letter-spacing: 0.34em !important;
-    box-shadow:
-        0 0 0 1px rgba(201, 168, 76, 0.5),
-        0 12px 40px rgba(201, 168, 76, 0.4) !important;
-}
-
-.dash-page button:hover::before {
-    animation: shimmer 0.7s ease forwards;
-}
-
-.dash-page button:active {
-    transform: translateY(0) !important;
-}
-
-/* ── Animations ── */
-@keyframes shimmer {
-    from {
-        transform: translateX(-100%);
+/* ===== RESPONSIVE ===== */
+@media (max-width: 500px) {
+    .dash-title {
+        font-size: 24px;
     }
 
-    to {
-        transform: translateX(100%);
-    }
-}
-
-@keyframes pageIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes cardIn {
-    from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* ── Responsive ── */
-@media (max-width: 600px) {
-    .dash-page>div:first-of-type {
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-
-    .dash-page>div:first-of-type>div {
-        width: 85vw !important;
-        max-width: 320px !important;
+    .dash-card p {
+        font-size: 22px;
     }
 }
