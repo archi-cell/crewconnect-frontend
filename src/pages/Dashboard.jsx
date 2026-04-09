@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../styles/dashboard.css"
+import "../styles/dashboard.css";
 
 export default function Dashboard() {
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const [stats, setStats] = useState({
         totalEvents: 0,
         totalUsers: 0,
@@ -16,7 +18,7 @@ export default function Dashboard() {
         const fetchStats = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:5000/api/events/stats/all",
+                    `${API_URL}/api/events/stats/all`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -72,6 +74,7 @@ export default function Dashboard() {
     );
 }
 
+// (Optional styles if used somewhere else)
 const cardStyle = {
     border: "1px solid #ccc",
     borderRadius: "10px",
