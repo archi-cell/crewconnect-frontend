@@ -24,7 +24,7 @@ function App() {
       <div style={{
         background: "#080b0f",
         minHeight: "100vh",
-        width: "100%",
+        width: "100vw",
         display: "block",   /* ← explicit block — no flex side-by-side */
         margin: 0,
         padding: 0,
