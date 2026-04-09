@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../styles/register.css"
+import "../styles/register.css";
 
 // Ambient floating particles
 const Particles = () =>
@@ -19,7 +19,7 @@ const Particles = () =>
         />
     ));
 
-// Password strength — returns 0–4
+// Password strength
 const getStrength = (pwd) => {
     if (!pwd) return 0;
     let score = 0;
@@ -34,6 +34,8 @@ const strengthLabel = ["", "Weak", "Fair", "Strong", "Excellent"];
 const strengthClass = ["", "active-weak", "active-fair", "active-strong", "active-great"];
 
 export default function Register() {
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const [data, setData] = useState({ name: "", email: "", password: "" });
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -48,9 +50,11 @@ export default function Register() {
         setLoading(true);
 
         try {
-            await axios.post("http://localhost:5000/api/auth/register", data);
+            await axios.post(`${API_URL}/api/auth/register`, data);
+
             setSuccess("Account created successfully. Redirecting…");
             setTimeout(() => navigate("/login"), 1400);
+
         } catch (err) {
             setError(err?.response?.data?.message || "Error registering. Please try again.");
         } finally {
@@ -67,20 +71,16 @@ export default function Register() {
             <Particles />
 
             <div className="register-card">
-                {/* Eyebrow */}
                 <div className="register-eyebrow">Create Account</div>
 
-                {/* Title */}
                 <h2 className="register-title">
                     Crew<span>Connect</span>
                 </h2>
 
-                {/* Divider */}
                 <div className="register-divider">
                     <div className="register-divider-gem" />
                 </div>
 
-                {/* Form */}
                 <div className="register-form">
                     {error && <div className="register-error">{error}</div>}
                     {success && <div className="register-success">{success}</div>}
@@ -118,7 +118,11 @@ export default function Register() {
                             {data.password && (
                                 <span style={{
                                     float: "right",
-                                    color: strength === 1 ? "#c0614a" : strength === 2 ? "#c9943a" : strength >= 3 ? "var(--gold)" : "transparent",
+                                    color:
+                                        strength === 1 ? "#c0614a" :
+                                        strength === 2 ? "#c9943a" :
+                                        strength >= 3 ? "var(--gold)" :
+                                        "transparent",
                                     fontStyle: "italic",
                                     letterSpacing: "0.15em"
                                 }}>
@@ -126,6 +130,7 @@ export default function Register() {
                                 </span>
                             )}
                         </label>
+
                         <input
                             className="register-input"
                             type="password"
@@ -134,7 +139,7 @@ export default function Register() {
                             onChange={(e) => setData({ ...data, password: e.target.value })}
                             onKeyDown={handleKeyDown}
                         />
-                        {/* Strength bar */}
+
                         <div className="register-strength">
                             {[1, 2, 3, 4].map((seg) => (
                                 <div
@@ -154,7 +159,6 @@ export default function Register() {
                     </button>
                 </div>
 
-                {/* Back link */}
                 <Link to="/login" className="register-back">
                     Already have an account? Login
                 </Link>
