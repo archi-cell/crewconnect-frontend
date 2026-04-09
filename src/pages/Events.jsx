@@ -3,17 +3,19 @@ import axios from "axios";
 import "../styles/events.css";
 
 export default function Events() {
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const [events, setEvents] = useState([]);
     const [comments, setComments] = useState({});
     const [newComment, setNewComment] = useState({});
 
-    // ✅ ADD USER
+    // ✅ USER
     const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/events", {
+                const res = await axios.get(`${API_URL}/api/events`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
@@ -37,7 +39,7 @@ export default function Events() {
     // ✅ Fetch comments
     const fetchComments = async (eventId) => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/comments/${eventId}`);
+            const res = await axios.get(`${API_URL}/api/comments/${eventId}`);
             setComments(prev => ({
                 ...prev,
                 [eventId]: res.data
@@ -53,7 +55,7 @@ export default function Events() {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/api/comments",
+                `${API_URL}/api/comments`,
                 {
                     eventId,
                     text: newComment[eventId]
@@ -83,7 +85,7 @@ export default function Events() {
     // ✅ DELETE EVENT
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/events/${id}`, {
+            await axios.delete(`${API_URL}/api/events/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -99,12 +101,11 @@ export default function Events() {
     // ✅ EDIT EVENT
     const handleEdit = async (id) => {
         const newTitle = prompt("Enter new title");
-
         if (!newTitle) return;
 
         try {
             const res = await axios.put(
-                `http://localhost:5000/api/events/${id}`,
+                `${API_URL}/api/events/${id}`,
                 { title: newTitle },
                 {
                     headers: {
@@ -142,7 +143,7 @@ export default function Events() {
                             <p><b>Type:</b> {e.eventType}</p>
                             <p><b>Venue:</b> {e.venue}</p>
 
-                            {/* ✅ ADMIN BUTTONS */}
+                            {/* ADMIN BUTTONS */}
                             {user?.role === "admin" && (
                                 <div className="admin-actions">
                                     <button onClick={() => handleEdit(e._id)}>Edit</button>
