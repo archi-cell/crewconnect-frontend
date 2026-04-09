@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../styles/Register.css";
+import "../styles/register.css"
 
 // Ambient floating particles
 const Particles = () =>
@@ -48,18 +48,11 @@ export default function Register() {
         setLoading(true);
 
         try {
-            await axios.post(
-                `${import.meta.env.VITE_API_URL}/api/auth/register`,
-                data
-            );
-
+            await axios.post("http://localhost:5000/api/auth/register", data);
             setSuccess("Account created successfully. Redirecting…");
             setTimeout(() => navigate("/login"), 1400);
-
         } catch (err) {
-            setError(
-                err?.response?.data?.message || "Error registering. Please try again."
-            );
+            setError(err?.response?.data?.message || "Error registering. Please try again.");
         } finally {
             setLoading(false);
         }
