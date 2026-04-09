@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import "../styles/createevent.css"
+import "../styles/createevent.css";
 
 export default function CreateEvent() {
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const [data, setData] = useState({
         title: "", clientName: "", createdBy: "",
         date: "", day: "", eventType: "", venue: "",
@@ -32,7 +34,7 @@ export default function CreateEvent() {
     const handleCreate = async () => {
         try {
             await axios.post(
-                "http://localhost:5000/api/events/create",
+                `${API_URL}/api/events/create`,
                 data,
                 {
                     headers: {
