@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "../styles/createEvent.css";
+import "../styles/createevent.css"
 
 export default function CreateEvent() {
     const [data, setData] = useState({
@@ -32,7 +32,7 @@ export default function CreateEvent() {
     const handleCreate = async () => {
         try {
             await axios.post(
-                `${import.meta.env.VITE_API_URL}/api/events/create`,
+                "http://localhost:5000/api/events/create",
                 data,
                 {
                     headers: {
@@ -42,57 +42,101 @@ export default function CreateEvent() {
             );
 
             alert("Event Created");
+
         } catch (err) {
-            console.log("CREATE EVENT ERROR:", err);
+            console.log(err);
             alert("Error creating event");
         }
     };
 
     return (
-        /* ✅ Only change from original: className="ce-page" */
-        <div className="ce-page">
-            <h2>Create Event</h2>
+        <div className="ce-wrapper">
+            <div className="ce-container">
 
-            <label>Event Name</label>
-            <input placeholder="Event Title" onChange={(e) => setData({ ...data, title: e.target.value })} />
+                <h1 className="ce-title">Create Event</h1>
 
-            <label>Select Date:</label>
-            <input type="date" onChange={handleDateChange} />
+                {/* BASIC INFO */}
+                <div className="ce-card">
+                    <h3>Event Details</h3>
 
-            <label>Select Day:</label>
-            <select value={data.day} onChange={(e) => setData({ ...data, day: e.target.value })}>
-                <option value="">Select Day</option>
-                <option>Sunday</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-            </select>
+                    <input placeholder="Event Title"
+                        onChange={(e) => setData({ ...data, title: e.target.value })} />
 
-            <label>Event Type</label>
-            <input placeholder="Event Type" onChange={(e) => setData({ ...data, eventType: e.target.value })} />
-            <label>Venue</label>
-            <input placeholder="Venue" onChange={(e) => setData({ ...data, venue: e.target.value })} />
+                    <input type="date" onChange={handleDateChange} />
 
-            <h3>Timeline</h3>
-            <label>Task</label>
-            <input placeholder="Task" value={task.task} onChange={(e) => setTask({ ...task, task: e.target.value })} />
-            <label>Time</label>
-            <input placeholder="Time" value={task.time} onChange={(e) => setTask({ ...task, time: e.target.value })} />
-            <button onClick={addTimeline}>Add Timeline</button>
+                    <select value={data.day}
+                        onChange={(e) => setData({ ...data, day: e.target.value })}>
+                        <option value="">Select Day</option>
+                        <option>Sunday</option>
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                    </select>
 
-            <h3>Staff Assignments</h3>
-            <label>Role</label>
-            <input placeholder="Role" value={staff.role} onChange={(e) => setStaff({ ...staff, role: e.target.value })} />
-            <label>Name</label>
-            <input placeholder="Name" value={staff.name} onChange={(e) => setStaff({ ...staff, name: e.target.value })} />
-            <label>Time</label>
-            <input placeholder="Time" value={staff.time} onChange={(e) => setStaff({ ...staff, time: e.target.value })} />
-            <button onClick={addStaff}>Add Staff</button>
+                    <input placeholder="Event Type"
+                        onChange={(e) => setData({ ...data, eventType: e.target.value })} />
 
-            <button onClick={handleCreate}>Create Event</button>
+                    <input placeholder="Venue"
+                        onChange={(e) => setData({ ...data, venue: e.target.value })} />
+                </div>
+
+                {/* TIMELINE */}
+                <div className="ce-card">
+                    <h3>Timeline</h3>
+
+                    <input placeholder="Task"
+                        value={task.task}
+                        onChange={(e) => setTask({ ...task, task: e.target.value })} />
+
+                    <input placeholder="Time"
+                        value={task.time}
+                        onChange={(e) => setTask({ ...task, time: e.target.value })} />
+
+                    <button className="ce-btn small" onClick={addTimeline}>
+                        Add Timeline
+                    </button>
+
+                    {data.timeline.map((t, i) => (
+                        <p key={i}>• {t.task} @ {t.time}</p>
+                    ))}
+                </div>
+
+                {/* STAFF */}
+                <div className="ce-card">
+                    <h3>Staff Assignments</h3>
+
+                    <input placeholder="Role"
+                        value={staff.role}
+                        onChange={(e) => setStaff({ ...staff, role: e.target.value })} />
+
+                    <input placeholder="Name"
+                        value={staff.name}
+                        onChange={(e) => setStaff({ ...staff, name: e.target.value })} />
+
+                    <input placeholder="Time"
+                        value={staff.time}
+                        onChange={(e) => setStaff({ ...staff, time: e.target.value })} />
+
+                    <button className="ce-btn small" onClick={addStaff}>
+                        Add Staff
+                    </button>
+
+                    {data.staffAssignments.map((s, i) => (
+                        <p key={i}>• {s.role}: {s.name}</p>
+                    ))}
+                </div>
+
+                {/* FINAL BUTTON */}
+                <div className="ce-actions">
+                    <button className="ce-btn" onClick={handleCreate}>
+                        Create Event
+                    </button>
+                </div>
+
+            </div>
         </div>
     );
 }
